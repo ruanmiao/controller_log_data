@@ -13,13 +13,6 @@ file_error_1 = 'mModel_mController/cos04_60_3_7/control_error_realtime.txt';
 file_error_2 = 'mModel_mController/cos04_60_3_7/control_error_realtime.txt';
 file_error_3 = 'mModel_mController/cos04_60_3_7/control_error_realtime.txt';
 
-file_stretching_dm = 'dModel_mController/cos04/count_stretching_violation.txt';
-file_stretching_D_wo = 'dModel_dController_woSC/count_stretching_violation.txt';
-file_stretching_D_w = 'dModel_dController_wSC/count_stretching_violation.txt';
-file_stretching_1 = 'mModel_mController/cos04_60_3_7/count_stretching_violation.txt';
-file_stretching_2 = 'mModel_mController/cos04_60_3_7/count_stretching_violation.txt';
-file_stretching_3 = 'mModel_mController/cos04_60_3_7/count_stretching_violation.txt';
-
 file_t_dm = 'dModel_mController/cos04/control_time.txt';
 file_t_D_wo = 'dModel_dController_woSC/control_time.txt';
 file_t_D_w = 'dModel_dController_wSC/control_time.txt';
@@ -27,10 +20,17 @@ file_t_1 = 'mModel_mController/cos04_60_3_7/control_time.txt';
 file_t_2 = 'mModel_mController/cos04_60_3_7/control_time.txt';
 file_t_3 = 'mModel_mController/cos04_60_3_7/control_time.txt';
 
-parameter_set_dm = 'md cos 0.4';
-parameter_set_D_wo = 'dd_wo cos 0.4';
-parameter_set_D_w = 'dd_w cos 0.4';
-parameter_set_1 = 'mm cos 0.4';
+fig_path_dm = 'mModel_mController/cos04_60_3_7/controlling_error_DM.pdf';
+fig_path_D_wo = 'mModel_mController/cos04_60_3_7/controlling_error_D_wo.pdf';
+fig_path_D_w = 'mModel_mController/cos04_60_3_7/controlling_error_D_w.pdf';
+fig_path_1 = 'mModel_mController/cos04_60_3_7/controlling_error_MM.pdf';
+fig_path_2 = 'mModel_mController/cos04_60_3_7/controlling_error_MM.pdf';
+fig_path_3 = 'mModel_mController/cos04_60_3_7/controlling_error_MM.pdf';
+
+parameter_set_dm = 'DM cos 0.4';
+parameter_set_D_wo = 'DD wo SC';
+parameter_set_D_w = 'DD w SC';
+parameter_set_1 = 'MM cos 0.4';
 parameter_set_2 = 'strething cos 0.4';
 parameter_set_3 = 'strething cos 0.4';
 
@@ -40,20 +40,6 @@ mean_error_D_w = readData_fn(file_error_D_w, space_hold_1);
 mean_error_1 = readData_fn(file_error_1, space_hold_1);
 mean_error_2 = readData_fn(file_error_2, space_hold_1);
 mean_error_3 = readData_fn(file_error_3, space_hold_1);
-
-stretching_count_dm = readData_fn(file_stretching_dm, space_hold_1);
-stretching_count_D_wo = readData_fn(file_stretching_D_wo, space_hold_1);
-stretching_count_D_w = readData_fn(file_stretching_D_w, space_hold_1);
-stretching_count_1 = readData_fn(file_stretching_1, space_hold_1);
-stretching_count_2 = readData_fn(file_stretching_2, space_hold_1);
-stretching_count_3 = readData_fn(file_stretching_3, space_hold_1);
-
-%{
-t_D = generateTime_fn(mean_error_D);
-t_1 = generateTime_fn(mean_error_1);
-t_2 = generateTime_fn(mean_error_2);
-t_3 = generateTime_fn(mean_error_3);
-%}
 
 t_dm = readTime(file_t_dm);
 t_D_wo = readTime(file_t_D_wo);
@@ -71,57 +57,39 @@ ind_3 = 1:length(t_3);
 
 %%%%%%%%%%%%%%%%%%%%%% select the parameter set showing whole data %%%%
 show_error = mean_error_1;
+%show_stretching_count = stretching_count_1;
 show_t = t_1;
 show_ind = ind_1;
 show_legend = parameter_set_1;
+show_fig_file = fig_path_1;
 
 %%%%%%%%%%%%%%%%%%%% show all in two plots: %%%%%%%%%%%%%%%%%%
-figure
+fig_D_wo = figure;
 plot(t_D_wo, mean_error_D_wo, show_t,show_error)
 legend(parameter_set_D_wo, show_legend)
-title('DD without Stretching correction vs. MM')
+title('DD without SC vs. MM')
 xlabel('time')
 ylabel('control error')
+saveas(fig_D_wo, fig_path_D_wo)
 
-figure
+fig_D_w = figure;
 plot(t_D_w, mean_error_D_w, show_t,show_error)
 legend(parameter_set_D_w, show_legend)
-title('DD with Stretching correction vs. MM')
+title('DD with SC vs. MM')
 xlabel('time')
 ylabel('control error')
+saveas(fig_D_w, fig_path_D_w)
 
-figure
+fig_DM = figure;
+% plot(t_dm, mean_error_dm, ...
+%    show_t,show_error,'LineWidth',4)
 plot(t_dm, mean_error_dm, ...
-    show_t,show_error,'LineWidth',4)
+    show_t,show_error)
 legend(parameter_set_dm, show_legend)
 title('DM vs. MM')
 xlabel('time (s)')
 ylabel('control error')
-
-
-%%%%%%%%%%%%%%%%%%%%% show stretching violation %%%%%%%%%%%%%%%%%%%%
-figure
-plot(t_D_wo, stretching_count_D_wo, show_t,show_error)
-legend(parameter_set_D_wo, show_legend)
-title('DD without Stretching correction vs. MM')
-xlabel('time')
-ylabel('control error')
-
-figure
-plot(t_D_w, stretching_count_D_w, show_t,show_error)
-legend(parameter_set_D_w, show_legend)
-title('DD with Stretching correction vs. MM')
-xlabel('time')
-ylabel('control error')
-
-figure
-plot(t_dm, mean_error_dm, ...
-    show_t,show_error,'LineWidth',4)
-legend(parameter_set_dm, show_legend)
-title('DM vs. MM')
-xlabel('time (s)')
-ylabel('control error')
-
+saveas(fig_DM, fig_path_dm)
 
 
 

@@ -50,34 +50,36 @@ ind_3 = 1:length(t_3);
 
 %%%%%%%%%%%%%%%%%%%%%% select the parameter set showing whole data %%%%
 show_stretching_factor = stretching_factor_1;
-%show_stretching_count = stretching_count_1;
+% show_stretching_count = stretching_count_1;
 show_t = t_1;
 show_ind = ind_1;
 show_legend = parameter_set_1;
 
-%%%%%%%%%%%%%%%%%%%% show all in two plots: %%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%% show stretching violation %%%%%%%%%%%%%%%%%%%%
 figure
 plot(t_D_wo, stretching_factor_D_wo, show_t,show_stretching_factor)
 legend(parameter_set_D_wo, show_legend)
-title('DD without SC vs. MM')
+title('Stretching factor: DD without SCvs. MM')
 xlabel('time')
-ylabel('stretching_factor')
+ylabel('control error')
 
 figure
-plot(t_D_w, stretching_factor_D_w, show_t,show_stretching_factor)
+plot(t_D_w, stretching_factor_D_w, show_t, show_stretching_factor)
 legend(parameter_set_D_w, show_legend)
-title('DD with SC vs. MM')
+title('Stretching factor: DD with SC vs. MM')
 xlabel('time')
-ylabel('stretching_factor')
+ylabel('control error')
 
 figure
+% plot(t_dm, stretching_factor_dm, ...
+%    show_t,show_stretching_factor,'LineWidth',4)
 plot(t_dm, stretching_factor_dm, ...
-    show_t,show_stretching_factor,'LineWidth',4)
+    show_t,show_stretching_factor)
 legend(parameter_set_dm, show_legend)
-title('DM vs. MM')
+title('Stretching factor: DM vs. MM')
 xlabel('time (s)')
-ylabel('stretching_factor')
-
+ylabel('control error')
 
 
 
