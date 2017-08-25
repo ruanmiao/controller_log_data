@@ -6,26 +6,26 @@ space_hold_28 = '%n %n %n %n %n  %n %n %n %n %n  %n %n %n %n %n  %n %n %n %n %n 
 space_hold_1 = '%n';
 
 %%%%%%%%%%% Error Analysis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-file_stretching_factor_dm = 'cloth_wafr/dModel_mController/cos04/realtime_stretching_factor.txt';
-file_stretching_factor_D_wo = 'cloth_wafr/dModel_dController_woSC/realtime_stretching_factor.txt';
-file_stretching_factor_D_w = 'cloth_wafr/dModel_dController_wSC/realtime_stretching_factor.txt';
-file_stretching_factor_1 = 'cloth_wafr/mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
-file_stretching_factor_2 = 'cloth_wafr/mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
-file_stretching_factor_3 = 'cloth_wafr/mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
+file_stretching_factor_dm = 'dModel_mController/cos04/realtime_stretching_factor.txt';
+file_stretching_factor_D_wo = 'dModel_dController_woSC/realtime_stretching_factor.txt';
+file_stretching_factor_D_w = 'dModel_dController_wSC/realtime_stretching_factor.txt';
+file_stretching_factor_1 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
+file_stretching_factor_2 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
+file_stretching_factor_3 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
 
-file_t_dm = 'cloth_wafr/dModel_mController/cos04/control_time.txt';
-file_t_D_wo = 'cloth_wafr/dModel_dController_woSC/control_time.txt';
-file_t_D_w = 'cloth_wafr/dModel_dController_wSC/control_time.txt';
-file_t_1 = 'cloth_wafr/mModel_mController/cos04_60_3_7/control_time.txt';
-file_t_2 = 'cloth_wafr/mModel_mController/cos04_60_3_7/control_time.txt';
-file_t_3 = 'cloth_wafr/mModel_mController/cos04_60_3_7/control_time.txt';
+file_t_dm = 'dModel_mController/cos04/control_time.txt';
+file_t_D_wo = 'dModel_dController_woSC/control_time.txt';
+file_t_D_w = 'dModel_dController_wSC/control_time.txt';
+file_t_1 = 'mModel_mController/cos04_60_3_7/control_time.txt';
+file_t_2 = 'mModel_mController/cos04_60_3_7/control_time.txt';
+file_t_3 = 'mModel_mController/cos04_60_3_7/control_time.txt';
 
-fig_path_dm = 'cloth_wafr/mModel_mController/cos04_60_3_7/stretching_factor_DM.pdf';
-fig_path_D_wo = 'cloth_wafr/mModel_mController/cos04_60_3_7/stretching_factor_D_wo.pdf';
-fig_path_D_w = 'cloth_wafr/mModel_mController/cos04_60_3_7/stretching_factor_D_w.pdf';
-fig_path_1 = 'cloth_wafr/mModel_mController/cos04_60_3_7/stretching_factor_MM.pdf';
-fig_path_2 = 'cloth_wafr/mModel_mController/cos04_60_3_7/stretching_factor_MM.pdf';
-fig_path_3 = 'cloth_wafr/mModel_mController/cos04_60_3_7/stretching_factor_MM.pdf';
+fig_path_dm = 'mModel_mController/cos04_60_3_7/stretching_factor_DM.pdf';
+fig_path_D_wo = 'mModel_mController/cos04_60_3_7/stretching_factor_D_wo.pdf';
+fig_path_D_w = 'mModel_mController/cos04_60_3_7/stretching_factor_D_w.pdf';
+fig_path_1 = 'mModel_mController/cos04_60_3_7/stretching_factor_MM.pdf';
+fig_path_2 = 'mModel_mController/cos04_60_3_7/stretching_factor_MM.pdf';
+fig_path_3 = 'mModel_mController/cos04_60_3_7/stretching_factor_MM.pdf';
 
 parameter_set_dm = 'md cos 0.4';
 parameter_set_D_wo = 'dd_wo cos 0.4';

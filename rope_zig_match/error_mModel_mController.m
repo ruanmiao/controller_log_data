@@ -9,23 +9,23 @@ space_hold_1 = '%n';
 file_error_dm = 'dModel_mController/cos075/control_error_realtime.txt';
 file_error_D_wo = 'dModel_dController_woSC/control_error_realtime.txt';
 file_error_D_w = 'dModel_dController_wSC/control_error_realtime.txt';
-file_error_1 = 'mModel_mController/cos075_60_3_7/control_error_realtime.txt';
-file_error_2 = 'mModel_mController/cos075_60_3_7/control_error_realtime.txt';
-file_error_3 = 'mModel_mController/cos075_60_3_7/control_error_realtime.txt';
+file_error_1 = 'mModel_mController/cos075_200000_3_10/control_error_realtime.txt';
+file_error_2 = 'mModel_mController/cos075_200000_3_10/control_error_realtime.txt';
+file_error_3 = 'mModel_mController/cos075_200000_3_10/control_error_realtime.txt';
 
 file_t_dm = 'dModel_mController/cos075/control_time.txt';
 file_t_D_wo = 'dModel_dController_woSC/control_time.txt';
 file_t_D_w = 'dModel_dController_wSC/control_time.txt';
-file_t_1 = 'mModel_mController/cos075_60_3_7/control_time.txt';
-file_t_2 = 'mModel_mController/cos075_60_3_7/control_time.txt';
-file_t_3 = 'mModel_mController/cos075_60_3_7/control_time.txt';
+file_t_1 = 'mModel_mController/cos075_200000_3_10/control_time.txt';
+file_t_2 = 'mModel_mController/cos075_200000_3_10/control_time.txt';
+file_t_3 = 'mModel_mController/cos075_200000_3_10/control_time.txt';
 
-fig_path_dm = 'mModel_mController/cos075_60_3_7/controlling_error_DM.pdf';
-fig_path_D_wo = 'mModel_mController/cos075_60_3_7/controlling_error_D_wo.pdf';
-fig_path_D_w = 'mModel_mController/cos075_60_3_7/controlling_error_D_w.pdf';
-fig_path_1 = 'mModel_mController/cos075_60_3_7/controlling_error_MM.pdf';
-fig_path_2 = 'mModel_mController/cos075_60_3_7/controlling_error_MM.pdf';
-fig_path_3 = 'mModel_mController/cos075_60_3_7/controlling_error_MM.pdf';
+fig_path_dm = 'mModel_mController/cos075_200000_3_10/controlling_error_DM.pdf';
+fig_path_D_wo = 'mModel_mController/cos075_200000_3_10/controlling_error_D_wo.pdf';
+fig_path_D_w = 'mModel_mController/cos075_200000_3_10/controlling_error_D_w.pdf';
+fig_path_1 = 'mModel_mController/cos075_200000_3_10/controlling_error_MM.pdf';
+fig_path_2 = 'mModel_mController/cos075_200000_3_10/controlling_error_MM.pdf';
+fig_path_3 = 'mModel_mController/cos075_200000_3_10/controlling_error_MM.pdf';
 
 parameter_set_dm = 'DM cos 0.4';
 parameter_set_D_wo = 'DD wo SC';
