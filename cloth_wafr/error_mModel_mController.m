@@ -92,10 +92,30 @@ real_time_sum_mm(1) = mean_error_mm(1);
 real_time_sum_dm(1) = mean_error_dm(1); 
 real_time_sum_dd_wo(1) = mean_error_dd_wo(1);     
 
+count_min_mm = 0;
+count_min_dm = 0;
+count_min_dd_wo = 0;
+
 for i = 2:length(t_mm)
    real_time_sum_mm(i) = real_time_sum_mm(i-1) + mean_error_mm(i); 
    real_time_sum_dm(i) = real_time_sum_dm(i-1) + mean_error_dm(i); 
    real_time_sum_dd_wo(i) = real_time_sum_dd_wo(i-1) + mean_error_dd_wo(i);     
+   
+   if mean_error_mm(i) < mean_error_dm(i)
+       if mean_error_mm(i) < mean_error_dd_wo(i)
+           count_min_mm = count_min_mm + 1;
+       elseif mean_error_mm(i) > mean_error_dd_wo(i)
+           count_min_dd_wo = count_min_dd_wo + 1;
+       end
+   elseif mean_error_mm(i) > mean_error_dm(i)
+       if mean_error_dm(i) < mean_error_dd_wo(i)
+           count_min_dm = count_min_dm + 1;
+       elseif mean_error_dm(i) > mean_error_dd_wo(i)
+           count_min_dd_wo = count_min_dd_wo + 1;
+       end        
+   elseif mean_error_mm(i) > mean_error_dd_wo(i)
+       count_min_dd_wo = count_min_dd_wo + 1;
+   end
 end
 
 fig_2 = figure;
@@ -105,6 +125,12 @@ title('MM, MD, DD without SC')
 xlabel('time')
 ylabel('control integral error')
 saveas(fig_2 ,fig_path_mm)
+
+format long
+disp(sum_mean_error_mm);
+disp(sum_mean_error_dm);
+disp(sum_mean_error_dd_wo);
+
 
 % fig_D_w = figure;
 % plot(t_D_w, mean_error_D_w, show_t,show_error)

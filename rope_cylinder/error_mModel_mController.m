@@ -124,6 +124,11 @@ xlabel('time')
 ylabel('control integral error')
 saveas(fig_2 ,fig_path_mm)
 
+format long
+disp(sum_mean_error_mm);
+disp(sum_mean_error_dm);
+disp(sum_mean_error_dd_wo);
+
 % fig_D_w = figure;
 % plot(t_D_w, mean_error_D_w, show_t,show_error)
 % legend(parameter_set_dd_w, show_legend)
