@@ -10,23 +10,23 @@ space_hold_3 = '%n %n %n';
 % file_error_dm = 'dModel_mController/cos04/realtime_stretching_factor.txt';
 % file_error_D_wo = 'dModel_dController_woSC/realtime_stretching_factor.txt';
 % file_error_D_w = 'dModel_dController_wSC/realtime_stretching_factor.txt';
-file_error_1 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
-file_error_2 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
-file_error_3 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.txt';
+file_error_1 = 'mModel_mController/to_test/realtime_stretching_factor.txt';
+file_error_2 = 'mModel_mController/to_test/realtime_stretching_factor.txt';
+file_error_3 = 'mModel_mController/to_test/realtime_stretching_factor.txt';
 
 % file_t_dm = 'dModel_mController/cos04/control_time.txt';
 % file_t_D_wo = 'dModel_dController_woSC/control_time.txt';
 % file_t_D_w = 'dModel_dController_wSC/control_time.txt';
-file_t_1 = 'mModel_mController/cos04_60_3_7/control_time.txt';
-file_t_2 = 'mModel_mController/cos04_60_3_7/control_time.txt';
-file_t_3 = 'mModel_mController/cos04_60_3_7/control_time.txt';
+file_t_1 = 'mModel_mController/to_test/control_time.txt';
+file_t_2 = 'mModel_mController/to_test/control_time.txt';
+file_t_3 = 'mModel_mController/to_test/control_time.txt';
 
-fig_path_dm = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.pdf';
-fig_path_dd_wo = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.pdf';
-fig_path_dd_w = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.pdf';
-fig_path_1 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.pdf';
-fig_path_2 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.pdf';
-fig_path_3 = 'mModel_mController/cos04_60_3_7/realtime_stretching_factor.pdf';
+fig_path_dm = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
+fig_path_dd_wo = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
+fig_path_dd_w = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
+fig_path_1 = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
+fig_path_2 = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
+fig_path_3 = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
 
 parameter_set_dm = 'DM cos 0.4';
 parameter_set_dd_wo = 'DD wo SC';
@@ -68,28 +68,32 @@ xlabel('time')
 ylabel('control error')
 saveas(fig_1 ,fig_path_mm)
 
-sum_mean_error_mm = sum(stretching_factor_mm);
-sum_mean_error_dm = sum(stretching_factor_dm);
-sum_mean_error_dd_wo = sum(stretching_factor_dd_wo);
+stretching_up_bound = 1.2;
+% sum_mean_error_mm = sum(stretching_factor_mm(stretching_factor_mm > stretching_up_bound));
+% sum_mean_error_dm = sum(stretching_factor_dm(stretching_factor_dm > stretching_up_bound));
+% sum_mean_error_dd_wo = sum(stretching_factor_dd_wo(stretching_factor_dd_wo > stretching_up_bound));
 
-% fig_D_w = figure;
-% plot(t_D_w, mean_error_D_w, show_t,show_error)
-% legend(parameter_set_dd_w, show_legend)
-% title('DD with SC vs. MM')
-% xlabel('time')
-% ylabel('control error')
-% saveas(fig_D_w, fig_path_dd_w)
-% 
-% fig_DM = figure;
-% % plot(t_dm, mean_error_dm, ...
-% %    show_t,show_error,'LineWidth',4)
-% plot(t_dm, mean_error_dm, ...
-%     show_t,show_error)
-% legend(parameter_set_dm, show_legend)
-% title('DM vs. MM')
-% xlabel('time (s)')
-% ylabel('control error')
-% saveas(fig_DM, fig_path_dm)
+sum_mean_error_mm = 0;
+sum_mean_error_dm = 0;
+sum_mean_error_dd_wo = 0;
 
+sum_range = 1:length(t_mm)-1;
+%sum_range = 1:500;
+for i = sum_range
+   if stretching_factor_mm(i) > stretching_up_bound
+       sum_mean_error_mm = sum_mean_error_mm + stretching_factor_mm(i+1);
+   end
+   if stretching_factor_dm(i) > stretching_up_bound
+       sum_mean_error_dm = sum_mean_error_dm + stretching_factor_dm(i+1);
+   end
+   if stretching_factor_dd_wo(i) > stretching_up_bound
+       sum_mean_error_dd_wo = sum_mean_error_dd_wo + stretching_factor_dd_wo(i+1);
+   end
+end
 
-
+disp('MM')
+disp(sum_mean_error_mm);
+disp('DM')
+disp(sum_mean_error_dm);
+disp('DD')
+disp(sum_mean_error_dd_wo);
