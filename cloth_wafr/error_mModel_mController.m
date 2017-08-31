@@ -85,8 +85,8 @@ xlabel('time')
 ylabel('control error')
 saveas(fig_1 ,fig_path_mm)
 
-%sum_ind = 1:length(t_mm);
-sum_ind = 100 : 300;
+sum_ind = 1:length(t_mm);
+% sum_ind = 100 : 300;
 sum_mean_error_mm = sum(mean_error_mm(sum_ind));
 sum_mean_error_dm = sum(mean_error_dm(sum_ind));
 sum_mean_error_dd_wo = sum(mean_error_dd_wo(sum_ind));

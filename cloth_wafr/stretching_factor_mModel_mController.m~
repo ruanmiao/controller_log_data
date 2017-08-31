@@ -69,9 +69,41 @@ ylabel('control error')
 saveas(fig_1 ,fig_path_mm)
 
 stretching_up_bound = 1.25;
-sum_mean_error_mm = sum(stretching_factor_mm(stretching_factor_mm > stretching_up_bound));
-sum_mean_error_dm = sum(stretching_factor_dm(stretching_factor_dm > stretching_up_bound));
-sum_mean_error_dd_wo = sum(stretching_factor_dd_wo(stretching_factor_m > stretching_up_bound));
+% sum_mean_error_mm = sum(stretching_factor_mm(stretching_factor_mm > stretching_up_bound));
+% sum_mean_error_dm = sum(stretching_factor_dm(stretching_factor_dm > stretching_up_bound));
+% sum_mean_error_dd_wo = sum(stretching_factor_dd_wo(stretching_factor_dd_wo > stretching_up_bound));
+
+sum_mean_error_mm = 0;
+sum_mean_error_dm = 0;
+sum_mean_error_dd_wo = 0;
+
+real_time_stretching_integral_mm = zeros(length(t_mm),1);
+real_time_stretching_integral_dm = zeros(length(t_mm),1);
+real_time_stretching_integral_dd_wo = zeros(length(t_mm),1);
+
+sum_range = 1:length(t_mm)-1;
+%sum_range = 1:400;
+for i = sum_range
+   if stretching_factor_mm(i) > stretching_up_bound
+       if stretching_factor_mm(i+1) > stretching_factor_mm(i)
+           sum_mean_error_mm = sum_mean_error_mm + ...
+               (stretching_factor_mm(i+1) - stretching_factor_mm(i));
+           real_time_stretching_integral_mm
+       end
+   end
+   if stretching_factor_dm(i) > stretching_up_bound
+       if stretching_factor_dm(i+1) > stretching_factor_dm(i)
+           sum_mean_error_dm = sum_mean_error_dm + ...
+               (stretching_factor_dm(i+1) - stretching_factor_dm(i));
+       end
+   end
+   if stretching_factor_dd_wo(i) > stretching_up_bound
+       if stretching_factor_dd_wo(i+1) > stretching_factor_dd_wo(i)
+           sum_mean_error_dd_wo = sum_mean_error_dd_wo + ...
+               (stretching_factor_dd_wo(i+1) - stretching_factor_dd_wo(i));
+       end
+   end
+end
 
 disp('MM')
 disp(sum_mean_error_mm);
