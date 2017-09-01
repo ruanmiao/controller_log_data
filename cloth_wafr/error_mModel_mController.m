@@ -237,13 +237,13 @@ ylabel('relative error')
 saveas(fig_4 ,fig_path_relative_error)
 
 fig_5 = figure;
-% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
-%     t_dm(show_ind), relative_sum_dm(show_ind), ...
-%     t_dd_wo(show_ind), relative_sum_dd_wo(show_ind))
-% legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 plot(t_mm(show_ind), relative_sum_mm(show_ind),...
-    t_dm(show_ind), relative_sum_dm(show_ind))
-legend(parameter_set_mm, parameter_set_dm)
+    t_dm(show_ind), relative_sum_dm(show_ind), ...
+    t_dd_wo(show_ind), relative_sum_dd_wo(show_ind))
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
+%     t_dm(show_ind), relative_sum_dm(show_ind))
+% legend(parameter_set_mm, parameter_set_dm)
 title('integral relative error')
 xlabel('time')
 ylabel('relative error')

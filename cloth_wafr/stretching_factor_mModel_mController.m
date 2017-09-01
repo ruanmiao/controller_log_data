@@ -70,7 +70,9 @@ xlabel('time')
 ylabel('stretching factor')
 saveas(fig_1 ,fig_path_mm)
 
-stretching_up_bound = 1.25;
+% stretching_up_bound = 1.167;
+ stretching_up_bound = 1.25;
+
 % sum_mean_error_mm = sum(stretching_factor_mm(stretching_factor_mm > stretching_up_bound));
 % sum_mean_error_dm = sum(stretching_factor_dm(stretching_factor_dm > stretching_up_bound));
 % sum_mean_error_dd_wo = sum(stretching_factor_dd_wo(stretching_factor_dd_wo > stretching_up_bound));
@@ -129,5 +131,5 @@ legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 title('integrated violated stretching portion')
 xlabel('time')
 ylabel('integrated violated stretching portion')
-saveas(fig_2 ,fig_path_mm)
+saveas(fig_2 ,fig_path_realtime_integral_stretching)
 
