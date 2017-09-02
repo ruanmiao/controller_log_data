@@ -82,8 +82,8 @@ xlabel('time')
 ylabel('control error')
 saveas(fig_1 ,fig_path_mm)
 
-%sum_ind = 1:length(t_mm);
-sum_ind = 200 : 700;
+sum_ind = 1:length(t_mm);
+% sum_ind = 100 : 300;
 sum_mean_error_mm = sum(mean_error_mm(sum_ind));
 sum_mean_error_dm = sum(mean_error_dm(sum_ind));
 sum_mean_error_dd_wo = sum(mean_error_dd_wo(sum_ind));
@@ -234,40 +234,19 @@ ylabel('relative error')
 saveas(fig_4 ,fig_path_relative_error)
 
 fig_5 = figure;
-% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
-%     t_dm(show_ind), relative_sum_dm(show_ind), ...
-%     t_dd_wo(show_ind), relative_sum_dd_wo(show_ind))
-% legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 plot(t_mm(show_ind), relative_sum_mm(show_ind),...
-    t_dm(show_ind), relative_sum_dm(show_ind))
-legend(parameter_set_mm, parameter_set_dm)
+    t_dm(show_ind), relative_sum_dm(show_ind), ...
+    t_dd_wo(show_ind), relative_sum_dd_wo(show_ind))
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
+%     t_dm(show_ind), relative_sum_dm(show_ind))
+% legend(parameter_set_mm, parameter_set_dm)
 title('integral relative error')
 xlabel('time')
 ylabel('relative error')
 saveas(fig_5, fig_path_integral_relative_error)
 
 
-
-
-
-% fig_D_w = figure;
-% plot(t_D_w, mean_error_D_w, show_t,show_error)
-% legend(parameter_set_dd_w, show_legend)
-% title('DD with SC vs. MM')
-% xlabel('time')
-% ylabel('control error')
-% saveas(fig_D_w, fig_path_dd_w)
-% 
-% fig_DM = figure;
-% % plot(t_dm, mean_error_dm, ...
-% %    show_t,show_error,'LineWidth',4)
-% plot(t_dm, mean_error_dm, ...
-%     show_t,show_error)
-% legend(parameter_set_dm, show_legend)
-% title('DM vs. MM')
-% xlabel('time (s)')
-% ylabel('control error')
-% saveas(fig_DM, fig_path_dm)
 
 
 

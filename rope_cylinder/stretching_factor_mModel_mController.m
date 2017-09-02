@@ -28,6 +28,8 @@ fig_path_1 = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
 fig_path_2 = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
 fig_path_3 = 'mModel_mController/to_test/realtime_stretching_factor.pdf';
 
+fig_path_realtime_integral_stretching = 'mModel_mController/to_test/realtime_integral_stretching_factor.pdf';
+
 parameter_set_dm = 'DM cos 0.4';
 parameter_set_dd_wo = 'DD wo SC';
 parameter_set_dd_w = 'DD w SC';
@@ -63,12 +65,14 @@ fig_path_mm = fig_path_1;
 fig_1 = figure;
 plot(t_mm, stretching_factor_mm, t_dm, stretching_factor_dm, t_dd_wo, stretching_factor_dd_wo)
 legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
-title('MM, MD, DD without SC')
+title('stretching factor each step')
 xlabel('time')
-ylabel('control error')
+ylabel('stretching factor')
 saveas(fig_1 ,fig_path_mm)
 
-stretching_up_bound = 1.09;
+% stretching_up_bound = 1.167;
+ stretching_up_bound = 1.1;
+
 % sum_mean_error_mm = sum(stretching_factor_mm(stretching_factor_mm > stretching_up_bound));
 % sum_mean_error_dm = sum(stretching_factor_dm(stretching_factor_dm > stretching_up_bound));
 % sum_mean_error_dd_wo = sum(stretching_factor_dd_wo(stretching_factor_dd_wo > stretching_up_bound));
@@ -77,18 +81,39 @@ sum_mean_error_mm = 0;
 sum_mean_error_dm = 0;
 sum_mean_error_dd_wo = 0;
 
+real_time_stretching_integral_mm = zeros(length(t_mm),1);
+real_time_stretching_integral_dm = zeros(length(t_mm),1);
+real_time_stretching_integral_dd_wo = zeros(length(t_mm),1);
+
 sum_range = 1:length(t_mm)-1;
-%sum_range = 1:500;
+%sum_range = 1:400;
 for i = sum_range
-   if stretching_factor_mm(i) > stretching_up_bound
-       sum_mean_error_mm = sum_mean_error_mm + stretching_factor_mm(i+1);
-   end
-   if stretching_factor_dm(i) > stretching_up_bound
-       sum_mean_error_dm = sum_mean_error_dm + stretching_factor_dm(i+1);
-   end
-   if stretching_factor_dd_wo(i) > stretching_up_bound
-       sum_mean_error_dd_wo = sum_mean_error_dd_wo + stretching_factor_dd_wo(i+1);
-   end
+   
+    real_time_stretching_integral_mm(i+1) = real_time_stretching_integral_mm(i);
+    real_time_stretching_integral_dm(i+1) = real_time_stretching_integral_dm(i);
+    real_time_stretching_integral_dd_wo(i+1) = real_time_stretching_integral_dd_wo(i);
+   
+    if stretching_factor_mm(i) > stretching_up_bound
+       if stretching_factor_mm(i+1) > stretching_factor_mm(i)
+           sum_mean_error_mm = sum_mean_error_mm + ...
+               (stretching_factor_mm(i+1) - stretching_factor_mm(i));
+           real_time_stretching_integral_mm(i+1) = sum_mean_error_mm;
+       end
+    end
+    if stretching_factor_dm(i) > stretching_up_bound
+       if stretching_factor_dm(i+1) > stretching_factor_dm(i)
+           sum_mean_error_dm = sum_mean_error_dm + ...
+               (stretching_factor_dm(i+1) - stretching_factor_dm(i));
+           real_time_stretching_integral_dm(i+1) = sum_mean_error_dm;
+       end
+    end
+    if stretching_factor_dd_wo(i) > stretching_up_bound
+       if stretching_factor_dd_wo(i+1) > stretching_factor_dd_wo(i)
+           sum_mean_error_dd_wo = sum_mean_error_dd_wo + ...
+               (stretching_factor_dd_wo(i+1) - stretching_factor_dd_wo(i));
+           real_time_stretching_integral_dd_wo(i+1) = sum_mean_error_dd_wo;
+       end
+    end
 end
 
 disp('MM')
@@ -98,26 +123,15 @@ disp(sum_mean_error_dm);
 disp('DD')
 disp(sum_mean_error_dd_wo);
 
-
-% fig_D_w = figure;
-% plot(t_D_w, mean_error_D_w, show_t,show_error)
-% legend(parameter_set_dd_w, show_legend)
-% title('DD with SC vs. MM')
-% xlabel('time')
-% ylabel('control error')
-% saveas(fig_D_w, fig_path_dd_w)
-% 
-% fig_DM = figure;
-% % plot(t_dm, mean_error_dm, ...
-% %    show_t,show_error,'LineWidth',4)
-% plot(t_dm, mean_error_dm, ...
-%     show_t,show_error)
-% legend(parameter_set_dm, show_legend)
-% title('DM vs. MM')
-% xlabel('time (s)')
-% ylabel('control error')
-% saveas(fig_DM, fig_path_dm)
-
+fig_2 = figure;
+plot(t_mm, real_time_stretching_integral_mm, ...
+    t_dm, real_time_stretching_integral_dm, ...
+    t_dd_wo, real_time_stretching_integral_dd_wo)
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+title('integrated violated stretching portion')
+xlabel('time')
+ylabel('integrated violated stretching portion')
+saveas(fig_2 ,fig_path_realtime_integral_stretching)
 
 
 
