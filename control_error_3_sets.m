@@ -79,7 +79,7 @@ fig_path_integral_relative_error = 'mModel_mController/to_test/integral_relative
 %%%%%%%%%%%%%%%%%%%% show all in two plots: %%%%%%%%%%%%%%%%%%
 fig_1 = figure;
 plot(t_mm, mean_error_mm, t_dm, mean_error_dm, t_dd_wo, mean_error_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo,'Location', 'northwest')
 title('MM, MD, DD without SC')
 xlabel('time')
 ylabel('control error')
@@ -182,7 +182,7 @@ end
 fig_2 = figure;
 plot(t_mm, real_time_sum_mm, t_dm, real_time_sum_dm, ...
     t_dd_wo, real_time_sum_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
 title('integral of error')
 xlabel('time')
 ylabel('control integral error')
@@ -230,7 +230,7 @@ fig_4 = figure;
 % legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 plot(t_mm(show_ind), relative_error_mm(show_ind),...
     t_dm(show_ind), relative_error_dm(show_ind))
-legend(parameter_set_mm, parameter_set_dm)
+legend(parameter_set_mm, parameter_set_dm, 'Location', 'northwest')
 title('relative error')
 xlabel('time')
 ylabel('relative error')
@@ -240,7 +240,7 @@ fig_5 = figure;
 plot(t_mm(show_ind), relative_sum_mm(show_ind),...
     t_dm(show_ind), relative_sum_dm(show_ind), ...
     t_dd_wo(show_ind), relative_sum_dd_wo(show_ind))
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
 % plot(t_mm(show_ind), relative_sum_mm(show_ind),...
 %     t_dm(show_ind), relative_sum_dm(show_ind))
 % legend(parameter_set_mm, parameter_set_dm)
