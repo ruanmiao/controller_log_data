@@ -249,4 +249,46 @@ xlabel('time')
 ylabel('relative error')
 saveas(fig_5, fig_path_integral_relative_error)
 
+num_points = 1:length(t_mm);
+num_points = num_points';
+ave_relative_mm = relative_sum_mm./num_points;
+ave_relative_dm = relative_sum_dm./num_points;
+ave_relative_dd = relative_sum_dd_wo./num_points;
+
+ave_error_mm = real_time_sum_mm./num_points;
+ave_error_dm = real_time_sum_dm./num_points;
+ave_error_dd = real_time_sum_dd_wo./num_points;
+
+fig_path_ave_relative_error = 'mModel_mController/to_test/ave_relative_error_MM.pdf';
+fig_6 = figure;
+plot(t_mm(show_ind), ave_relative_mm(show_ind),...
+    t_dm(show_ind), ave_relative_dm(show_ind), ...
+    t_dd_wo(show_ind), ave_relative_dd(show_ind))
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
+% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
+%     t_dm(show_ind), relative_sum_dm(show_ind))
+% legend(parameter_set_mm, parameter_set_dm)
+title('average relative error')
+xlabel('time')
+ylabel('average relative error')
+saveas(fig_6, fig_path_ave_relative_error)
+
+
+fig_path_ave_error = 'mModel_mController/to_test/ave_error_MM.pdf';
+fig_7 = figure;
+plot(t_mm(show_ind), ave_error_mm(show_ind),...
+    t_dm(show_ind), ave_error_dm(show_ind), ...
+    t_dd_wo(show_ind), ave_error_dd(show_ind))
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
+% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
+%     t_dm(show_ind), relative_sum_dm(show_ind))
+% legend(parameter_set_mm, parameter_set_dm)
+title('average control error')
+xlabel('time')
+ylabel('average control error')
+saveas(fig_7, fig_path_ave_error)
+
+
+
+
 

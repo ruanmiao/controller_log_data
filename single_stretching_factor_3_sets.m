@@ -28,7 +28,7 @@ fig_path_1 = 'mModel_mController/stretching/MM/realtime_stretching_factor.pdf';
 fig_path_2 = 'mModel_mController/stretching/MM/realtime_stretching_factor.pdf';
 fig_path_3 = 'mModel_mController/stretching/MM/realtime_stretching_factor.pdf';
 
-fig_path_realtime_integral_stretching = 'mModel_mController/stretching/realtime_integral_stretching_factor.pdf';
+fig_path_realtime_integral_stretching = 'mModel_mController/stretching/MM/realtime_integral_stretching_factor.pdf';
 
 parameter_set_dm = 'DM cos 0.4';
 parameter_set_dd_wo = 'DD wo SC';
@@ -66,7 +66,7 @@ fig_path_mm = fig_path_1;
 %%%%%%%%%%%%%%%%%%%% show all in two plots: %%%%%%%%%%%%%%%%%%
 fig_1 = figure;
 plot(t_mm, stretching_factor_mm, t_dm, stretching_factor_dm, t_dd_wo, stretching_factor_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
 title('stretching factor each step')
 xlabel('time')
 ylabel('stretching factor')
@@ -129,7 +129,7 @@ fig_2 = figure;
 plot(t_mm, real_time_stretching_integral_mm, ...
     t_dm, real_time_stretching_integral_dm, ...
     t_dd_wo, real_time_stretching_integral_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
 title('integrated violated stretching portion')
 xlabel('time')
 ylabel('integrated violated stretching portion')

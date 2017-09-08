@@ -28,7 +28,7 @@ fig_path_1 = 'mModel_mController/stretching/MM/control_error_realtime.pdf';
 fig_path_2 = 'mModel_mController/stretching/MM/control_error_realtime.pdf';
 fig_path_3 = 'mModel_mController/stretching/MM/control_error_realtime.pdf';
 
-fig_path_realtime_integral_stretching = 'mModel_mController/stretching/single_control_error_realtime.pdf';
+fig_path_realtime_integral_stretching = 'mModel_mController/stretching/MM/single_control_error_realtime.pdf';
 
 parameter_set_dm = 'DM cos 0.4';
 parameter_set_dd_wo = 'DD wo SC';
