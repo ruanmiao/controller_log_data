@@ -1,4 +1,4 @@
-%close all
+close all
 close all
 clear all
 
@@ -262,7 +262,7 @@ plot(t_mm(show_ind), relative_sum_mm(show_ind),...
 legend(parameter_set_mm, parameter_set_dd_wo, 'Location', 'northwest')
 %title('Integration of relative control error')
 xlabel('time (s)')
-ylabel('intergration of e^r')
+ylabel('intergral of e^r')
 saveas(fig_5, fig_path_integral_relative_error)
 
 num_points = 1:length(t_mm);
