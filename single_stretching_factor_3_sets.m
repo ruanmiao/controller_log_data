@@ -24,16 +24,16 @@ file_t_3 = 'mModel_mController/stretching/MM/control_time.txt';
 fig_path_dm = 'mModel_mController/stretching/DM/realtime_stretching_factor.pdf';
 fig_path_dd_wo = 'mModel_mController/stretching/DD/realtime_stretching_factor.pdf';
 fig_path_dd_w = 'mModel_mController/stretching//DD/realtime_stretching_factor.pdf';
-fig_path_1 = 'mModel_mController/stretching/MM/realtime_stretching_factor.pdf';
+fig_path_1 = 'mModel_mController/stretching/MM/realtime_stretching_factor.png';
 fig_path_2 = 'mModel_mController/stretching/MM/realtime_stretching_factor.pdf';
 fig_path_3 = 'mModel_mController/stretching/MM/realtime_stretching_factor.pdf';
 
 fig_path_realtime_integral_stretching = 'mModel_mController/stretching/MM/realtime_integral_stretching_factor.pdf';
 
 parameter_set_dm = 'DM cos 0.4';
-parameter_set_dd_wo = 'DD wo SC';
+parameter_set_dd_wo = '\gamma_o';
 parameter_set_dd_w = 'DD w SC';
-parameter_set_1 = 'MM cos 0.4';
+parameter_set_1 = '\gamma_n';
 parameter_set_2 = 'strething cos 0.4';
 parameter_set_3 = 'strething cos 0.4';
 
@@ -63,17 +63,28 @@ ind_mm = ind_1;
 parameter_set_mm = parameter_set_1;
 fig_path_mm = fig_path_1;
 
+ stretching_up_bound = 1.167;
+% stretching_up_bound = 1.1;
+
 %%%%%%%%%%%%%%%%%%%% show all in two plots: %%%%%%%%%%%%%%%%%%
+
+show_end = length(t_mm);
+show_end = 80;
+show_ind = 1:show_end;
+
 fig_1 = figure;
-plot(t_mm, stretching_factor_mm, t_dm, stretching_factor_dm, t_dd_wo, stretching_factor_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
-title('stretching factor each step')
+h = plot(t_mm(show_ind), stretching_factor_mm(show_ind),...
+    t_dd_wo(show_ind), stretching_factor_dd_wo(show_ind), 'LineWidth',2)
+line([0;t_mm(show_end)],[stretching_up_bound; stretching_up_bound],...
+    'color','k','linestyle','--');
+legend(h([1 2]), parameter_set_mm, parameter_set_dd_wo,  'Location', 'northwest')
+% plot(t_mm, stretching_factor_mm, t_dm, stretching_factor_dm, t_dd_wo, stretching_factor_dd_wo)
+% legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
+%title('stretching factor each step')
 xlabel('time')
-ylabel('stretching factor')
+ylabel('\gamma')
 saveas(fig_1 ,fig_path_mm)
 
-% stretching_up_bound = 1.167;
- stretching_up_bound = 1.25;
 
 % sum_mean_error_mm = sum(stretching_factor_mm(stretching_factor_mm > stretching_up_bound));
 % sum_mean_error_dm = sum(stretching_factor_dm(stretching_factor_dm > stretching_up_bound));

@@ -11,9 +11,9 @@ space_hold_3 = '%n %n %n';
 % file_error_dm = 'dModel_mController/cos04/control_error_realtime.txt';
 % file_error_D_wo = 'dModel_dController_woSC/control_error_realtime.txt';
 % file_error_D_w = 'dModel_dController_wSC/control_error_realtime.txt';
-file_error_1 = 'mModel_mController/to_test/control_error_realtime.txt';
-file_error_2 = 'mModel_mController/to_test/control_error_realtime.txt';
-file_error_3 = 'mModel_mController/to_test/control_error_realtime.txt';
+file_error_1 = 'estimation/30/estimation_error.txt';
+file_error_2 = 'mModel_mController/to_test/estimation_error.txt';
+file_error_3 = 'mModel_mController/to_test/estimation_error.txt';
 
 % file_t_dm = 'dModel_mController/cos04/control_time.txt';
 % file_t_D_wo = 'dModel_dController_woSC/control_time.txt';
@@ -22,12 +22,12 @@ file_t_1 = 'mModel_mController/to_test/control_time.txt';
 file_t_2 = 'mModel_mController/to_test/control_time.txt';
 file_t_3 = 'mModel_mController/to_test/control_time.txt';
 
-fig_path_dm = 'mModel_mController/to_test/controlling_error_DM.pdf';
-fig_path_dd_wo = 'mModel_mController/to_test/controlling_error_D_wo.pdf';
-fig_path_dd_w = 'mModel_mController/to_test/controlling_error_D_w.pdf';
-fig_path_1 = 'mModel_mController/to_test/controlling_error_MM.pdf';
-fig_path_2 = 'mModel_mController/to_test/controlling_error_MM.pdf';
-fig_path_3 = 'mModel_mController/to_test/controlling_error_MM.pdf';
+fig_path_dm = 'mModel_mController/to_test/estimation_error.pdf';
+fig_path_dd_wo = 'mModel_mController/to_test/estimation_error.pdf';
+fig_path_dd_w = 'mModel_mController/to_test/estimation_error.pdf';
+fig_path_1 = 'mModel_mController/to_test/estimation_error.pdf';
+fig_path_2 = 'mModel_mController/to_test/estimation_error.pdf';
+fig_path_3 = 'mModel_mController/to_test/estimation_error.pdf';
 
 
 parameter_set_dm = 'DM cos 0.4';
@@ -37,7 +37,7 @@ parameter_set_1 = 'MM cos 0.4';
 parameter_set_2 = 'strething cos 0.4';
 parameter_set_3 = 'strething cos 0.4';
 
-[mean_error_1, mean_error_dm, mean_error_dd_wo]  = readData_fn(file_error_1, space_hold_3);
+estimation_error_1 = readData_fn(file_error_1, space_hold_1);
 
 % mean_error_D_wo = readData_fn(file_error_D_wo, space_hold_1);
 % mean_error_D_w = readData_fn(file_error_D_w, space_hold_1);
@@ -79,7 +79,7 @@ fig_path_integral_relative_error = 'mModel_mController/to_test/integral_relative
 %%%%%%%%%%%%%%%%%%%% show all in two plots: %%%%%%%%%%%%%%%%%%
 fig_1 = figure;
 plot(t_mm, mean_error_mm, t_dm, mean_error_dm, t_dd_wo, mean_error_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo,'Location', 'northwest')
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 title('MM, MD, DD without SC')
 xlabel('time')
 ylabel('control error')
@@ -182,7 +182,7 @@ end
 fig_2 = figure;
 plot(t_mm, real_time_sum_mm, t_dm, real_time_sum_dm, ...
     t_dd_wo, real_time_sum_dd_wo)
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 title('integral of error')
 xlabel('time')
 ylabel('control integral error')
@@ -230,7 +230,7 @@ fig_4 = figure;
 % legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 plot(t_mm(show_ind), relative_error_mm(show_ind),...
     t_dm(show_ind), relative_error_dm(show_ind))
-legend(parameter_set_mm, parameter_set_dm, 'Location', 'northwest')
+legend(parameter_set_mm, parameter_set_dm)
 title('relative error')
 xlabel('time')
 ylabel('relative error')
@@ -240,7 +240,7 @@ fig_5 = figure;
 plot(t_mm(show_ind), relative_sum_mm(show_ind),...
     t_dm(show_ind), relative_sum_dm(show_ind), ...
     t_dd_wo(show_ind), relative_sum_dd_wo(show_ind))
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
+legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo)
 % plot(t_mm(show_ind), relative_sum_mm(show_ind),...
 %     t_dm(show_ind), relative_sum_dm(show_ind))
 % legend(parameter_set_mm, parameter_set_dm)
@@ -248,32 +248,5 @@ title('integral relative error')
 xlabel('time')
 ylabel('relative error')
 saveas(fig_5, fig_path_integral_relative_error)
-
-num_points = 1:length(t_mm);
-ave_relative_mm = relative_sum_mm./num_points;
-ave_relative_dm = relative_sum_dm./num_points;
-ave_relative_dd = relative_sum_dd./num_points;
-
-ave_error_mm = real_time_sum_mm./num_points;
-ave_error_dm = real_time_sum_dm./num_points;
-ave_error_dd = real_time_sum_dd_wo./num_points;
-
-fig_path_in_relative_error = 'mModel_mController/to_test/ave_relative_error_MM.pdf';
-fig_6 = figure;
-plot(t_mm(show_ind), ave_relative_mm(show_ind),...
-    t_dm(show_ind), ave_relative_dm(show_ind), ...
-    t_dd_wo(show_ind), ave_relative_dd(show_ind))
-legend(parameter_set_mm, parameter_set_dm, parameter_set_dd_wo, 'Location', 'northwest')
-% plot(t_mm(show_ind), relative_sum_mm(show_ind),...
-%     t_dm(show_ind), relative_sum_dm(show_ind))
-% legend(parameter_set_mm, parameter_set_dm)
-title('average relative error')
-xlabel('time')
-ylabel('average relative error')
-saveas(fig_6, fig_path_integral_relative_error)
-
-
-
-
 
 
