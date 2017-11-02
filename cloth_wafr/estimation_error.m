@@ -47,7 +47,7 @@ ind_3 = 1:length(t_3);
 fig_1 = figure;
 plot(t_1, estimation_error_1, t_2, estimation_error_2, t_3, estimation_error_3)
 legend(parameter_set_1, parameter_set_2, parameter_set_3)
-title('estimation_error')
+title('estimation error')
 xlabel('time')
 ylabel('error')
 saveas(fig_1 ,fig_path_1)
